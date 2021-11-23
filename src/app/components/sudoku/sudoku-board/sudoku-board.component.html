@@ -1,0 +1,23 @@
+<div *ngFor="let row of grid; let rowInd = index" class="sudokuRow">
+  <div *ngFor="let col of row; let colInd = index"
+    class="cell"
+    [class.top] = "rowInd % 3 === 0"
+    [class.bottom] = "rowInd % 3 === 2"
+    [class.left] = "colInd % 3 === 0"
+    [class.right] = "colInd % 3 === 2"
+    [class.firstRow] = "rowInd === 0"
+    [class.lastRow] = "rowInd === 8"
+    [class.firstCol] = "colInd === 0"
+    [class.lastCol] = "colInd === 8"
+  >
+      <input
+          type="number"
+          [class.fact]="col.readonly"
+          [disabled]="readOnly || col.readonly"
+          min="1"
+          max="9"
+          [value]="col.value || ''"
+          (input)="cellChanged($event, rowInd, colInd)"
+      >
+  </div>
+</div>

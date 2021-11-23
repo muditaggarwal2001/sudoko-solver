@@ -1,0 +1,32 @@
+  <div class="row">
+    <div class="title">SUDOKU SOLVER</div>
+  </div>
+
+  <div class="row">
+    <div class="col-8 items">
+      <mat-form-field class="problem-input" appearance="fill">
+        <mat-label>Sudoku problem</mat-label>
+        <input matInput [formControl]="problemControl">
+      </mat-form-field>
+    </div>
+    <div class="col-2 submit-button">
+      <button mat-raised-button color="primary" [disabled]="problemControl.invalid || !problemControl.value" (click)="submitProblem()">Submit</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-5 items">
+      <app-sudoku-board [grid]="problemGrid"></app-sudoku-board>
+    </div>
+
+    <div class="col-2 items">
+      <button (click)="solveProblem()">Solve</button>
+    </div>
+
+    <div class="col-5 items">
+      <app-sudoku-board [readOnly]="true" [grid]="solutionGrid"></app-sudoku-board>
+    </div>
+  </div>
+
+
+
