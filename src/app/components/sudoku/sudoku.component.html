@@ -14,13 +14,17 @@
     </div>
   </div>
 
+  <div *ngIf="error" class="row">
+    <div class="text-danger">Contradiction detected. This problem cannot be solved.</div>
+  </div>
+
   <div class="row">
     <div class="col-5 items">
       <app-sudoku-board [grid]="problemGrid"></app-sudoku-board>
     </div>
 
     <div class="col-2 items">
-      <button (click)="solveProblem()">Solve</button>
+      <button (click)="solveProblem()" class="solve-button">Solve</button>
     </div>
 
     <div class="col-5 items">
