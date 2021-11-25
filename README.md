@@ -1,6 +1,7 @@
 # SudokuSolver
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.13.
+It requires minimum Node version 12.14.x. (Node version 12.22.7 was used to develop this project).
 
 ## Development server
 
