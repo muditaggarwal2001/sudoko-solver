@@ -76,6 +76,41 @@ describe('SudokuComponent', () => {
     }
   });
 
+  it("should eliminate rest of candidate value when assigning a value to a cell", () => {
+    const spy = spyOn(component, 'eliminate').and.callThrough();
+    component.assign(component.values, '00', '1');
+    expect(component.values['00']).toEqual('1');
+    expect(spy).toHaveBeenCalledTimes(28); // 8 candidate values and 20 peers
+  });
+
+  it("should eliminate selected value from peers when 2nd last candidate value is removed", () => {
+    const spy = spyOn(component, 'eliminate').and.callThrough();
+    component.values['00']='12';
+    component.eliminate(component.values, '00', '2');
+    expect(component.values['00']).toEqual('1');
+    expect(spy).toHaveBeenCalledTimes(21);
+  });
+
+  it('should call assign on one of the peers when it is only one that has that value as its candidate', () => {
+    const spy = spyOn(component, 'assign').and.callThrough();
+    const value = '12345678';
+    for(let i = 0; i< 9; i++) {
+      component.values['0'+i] = value;
+    }
+    component.values['08'] = '129';
+    component.values['01'] = '129';
+    component.eliminate(component.values, '01', '9');
+    expect(component.values['08']).toEqual('9');
+    expect(spy).toHaveBeenCalled();
+  });
+
+  it('should return false when on assigning get contradiction on elimination', () => {
+    component.values['08'] = '9';
+    component.values['00'] = '89';
+    const result = component.assign(component.values, '00', '9');
+    expect(result).toBeFalsy();
+  });
+
   it("should solve the input problem", () => {
     const problem = '4.....8.5.3..........7......2.....6.....8.4......1.......6.3.7.5..2.....1.4......';
     const solution = '417369825632158947958724316825437169791586432346912758289643571573291684164875293';
