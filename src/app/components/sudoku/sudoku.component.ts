@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { sudoku } from 'src/app/interfaces/sudoku';
-import { digits, rowsCols, unitRowsCols } from 'src/app/shared/constants';
-import { Util } from 'src/app/shared/Util';
+import { sudoku } from '../../interfaces/sudoku';
+import { digits, rowsCols, unitRowsCols } from '../../shared/constants';
+import { Util } from '../../shared/Util';
 
 @Component({
   selector: 'app-sudoku',
